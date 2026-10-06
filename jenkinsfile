@@ -4,40 +4,17 @@ pipeline {
 
     stages {
 
-        stage('Show Jenkins Information') {
+        stage('Use Credential') {
             steps {
-                echo "Job Name: ${env.JOB_NAME}"
-                echo "Build Number: ${env.BUILD_NUMBER}"
-                echo "Workspace: ${env.WORKSPACE}"
+                withCredentials([
+                    string(
+                        credentialsId: 'demo-secret',
+                        variable: 'MY_SECRET'
+                    )
+                ]) {
+                    echo "Credential is available to Jenkins"
+                }
             }
-        }
-
-        stage('Build') {
-            steps {
-                echo 'Building the project'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Running tests'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying the application'
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-
-        failure {
-            echo 'Pipeline failed!'
         }
     }
 }
