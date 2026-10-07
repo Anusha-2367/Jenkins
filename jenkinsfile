@@ -5,6 +5,13 @@ pipeline {
 }
 
     stages {
+        stage('Check Agent') {
+    steps {
+        bat 'whoami'
+        bat 'hostname'
+        bat 'java -version'
+    }
+}
 
         stage('Use Credential') {
             steps {
