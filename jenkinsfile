@@ -1,29 +1,26 @@
 pipeline {
 
     agent {
-    label 'windows'
-}
+        label 'windows'
+    }
 
     stages {
-        stage('Check Agent') {
-    steps {
-        bat 'whoami'
-        bat 'hostname'
-        bat 'java -version'
-    }
-}
 
-        stage('Use Credential') {
+        stage('Agent Test') {
             steps {
-                withCredentials([
-                    string(
-                        credentialsId: 'demo-secret',
-                        variable: 'MY_SECRET'
-                    )
-                ]) {
-                    echo "Credential is available to Jenkins"
-                }
+                echo 'Testing Windows Agent'
+
+                bat 'echo ===== AGENT TEST ====='
+                bat 'whoami'
+                bat 'hostname'
+                bat 'echo WORKSPACE=%WORKSPACE%'
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Windows Agent test completed successfully!'
         }
     }
 }
