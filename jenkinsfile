@@ -4,12 +4,13 @@ pipeline {
 
     stages {
 
-        stage('Agent Test From GitHub') {
-            steps {
+        stage('Agent Test') {
+            agent {
+                label 'windows'
+            }
 
-                echo '================================='
-                echo 'THIS PIPELINE IS RUNNING FROM GITHUB'
-                echo '================================='
+            steps {
+                echo 'THIS STAGE MUST RUN ON WINDOWS AGENT'
 
                 bat 'hostname'
                 bat 'whoami'
