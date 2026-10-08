@@ -6,21 +6,30 @@ pipeline {
 
     stages {
 
-        stage('Agent Test') {
+        stage('Check Workspace') {
             steps {
-                echo 'Testing Windows Agent'
+                echo 'Checking Jenkins workspace'
 
-                bat 'echo ===== AGENT TEST ====='
-                bat 'whoami'
-                bat 'hostname'
-                bat 'echo WORKSPACE=%WORKSPACE%'
+                bat 'echo Current workspace: %WORKSPACE%'
+                bat 'dir'
+            }
+        }
+
+        stage('Show Files') {
+            steps {
+                bat 'echo ===== PROJECT FILES ====='
+                bat 'dir /b'
             }
         }
     }
 
     post {
         success {
-            echo 'Windows Agent test completed successfully!'
+            echo 'Workspace test completed successfully!'
+        }
+
+        failure {
+            echo 'Workspace test failed!'
         }
     }
 }
