@@ -2,6 +2,10 @@ pipeline {
 
     agent none
 
+    options {
+        skipDefaultCheckout(true)
+    }
+
     stages {
 
         stage('Workspace Test') {
@@ -12,7 +16,16 @@ pipeline {
 
             steps {
 
-                echo '===== JENKINS WORKSPACE ====='
+                echo '===== RUNNING ON WINDOWS AGENT ====='
+
+                bat 'hostname'
+                bat 'whoami'
+
+                echo '===== CHECKOUT SOURCE CODE ====='
+
+                checkout scm
+
+                echo '===== WORKSPACE ====='
 
                 bat 'echo Workspace: %WORKSPACE%'
 
