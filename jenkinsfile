@@ -6,9 +6,13 @@ pipeline {
 
     stages {
 
-        stage('Test Agent') {
+        stage('Agent Test From GitHub') {
             steps {
-                bat 'echo ===== AGENT TEST ====='
+
+                echo '================================='
+                echo 'THIS PIPELINE IS RUNNING FROM GITHUB'
+                echo '================================='
+
                 bat 'hostname'
                 bat 'whoami'
                 bat 'echo WORKSPACE=%WORKSPACE%'
