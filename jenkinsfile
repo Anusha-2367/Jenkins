@@ -4,17 +4,25 @@ pipeline {
 
     stages {
 
-        stage('Agent test') {
+        stage('Workspace Test') {
+
             agent {
                 label 'windows'
             }
 
             steps {
-                echo 'THIS STAGE MUST RUN ON WINDOWS AGENT'
 
-                bat 'hostname'
-                bat 'whoami'
-                bat 'echo WORKSPACE=%WORKSPACE%'
+                echo '===== JENKINS WORKSPACE ====='
+
+                bat 'echo Workspace: %WORKSPACE%'
+
+                echo '===== PROJECT FILES ====='
+
+                bat 'dir /b'
+
+                echo '===== GIT STATUS ====='
+
+                bat 'git status'
             }
         }
     }
