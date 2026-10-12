@@ -23,7 +23,7 @@ pipeline {
 
                 echo '===== CHECKOUT SOURCE CODE ====='
 
-                checkout scm
+                
 
                 echo '===== WORKSPACE ====='
 
