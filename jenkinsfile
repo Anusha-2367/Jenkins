@@ -15,6 +15,11 @@ pipeline {
             agent {
                 label 'windows'
             }
+        stage('Create Artifact') {
+    steps {
+        bat 'echo This is my first Jenkins artifact > build-info.txt'
+    }
+}
 
             steps {
 
