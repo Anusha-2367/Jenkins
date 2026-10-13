@@ -35,7 +35,7 @@ pipeline {
 
                 bat 'dir /b'
 
-                echo '===== GIT STATUS ====='
+                echo '===== Testing GitHub Webhook Trigger ====='
 
                 bat 'git status'
             }
