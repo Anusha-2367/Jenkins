@@ -46,4 +46,10 @@ pipeline {
             }
         }
     }
+ post {
+    success {
+        archiveArtifacts artifacts: 'build-info.txt',
+                        fingerprint: true
+    }
+}
 }
