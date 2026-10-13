@@ -1,4 +1,5 @@
-// Testing GitHub webhook trigger
+
+ // Testing GitHub webhook trigger
 
 pipeline {
 
@@ -15,11 +16,6 @@ pipeline {
             agent {
                 label 'windows'
             }
-        stage('Create Artifact') {
-    steps {
-        bat 'echo This is my first Jenkins artifact > build-info.txt'
-    }
-}
 
             steps {
 
@@ -45,11 +41,29 @@ pipeline {
                 bat 'git status'
             }
         }
-    }
- post {
-    success {
-        archiveArtifacts artifacts: 'build-info.txt',
+
+        stage('Create Artifact') {
+
+            agent {
+                label 'windows'
+            }
+
+            steps {
+                echo '===== CREATING BUILD ARTIFACT ====='
+
+                bat 'echo This is my first Jenkins artifact > build-info.txt'
+
+                bat 'type build-info.txt'
+            }
+
+            post {
+                success {
+                    archiveArtifacts(
+                        artifacts: 'build-info.txt',
                         fingerprint: true
+                    )
+                }
+            }
+        }
     }
-}
 }
